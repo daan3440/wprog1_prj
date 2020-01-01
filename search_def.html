@@ -9,7 +9,7 @@
 	<meta name="robots" content="noindex" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Statistiskordlista Engelska - Svenska</title>
-	<!--<link rel="stylesheet" href="style.css">-->
+	<link rel="stylesheet" href="css/search.css">
 	<!--<link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet">-->
 	<link rel="alternate" type="application/rss+xml" title="RSS Feed - Daniel Andersson" href="/rss/rss.xml" />  
         <meta charset="UTF-8">
@@ -17,21 +17,39 @@
         <script src="js/script.js"></script>
     </head>
     <body>
-    <section>
-        <form>
+        <header class="phead">
+	<section>
+		<h1>Engelsk-Svensk Statistisk ordbok</h1> 
+        </section>
+</header>
+        <main>
+    <section class="main">
+        <form class="search-form">
 <!--            <label for="null">Sortering: </label>
 	<label for="eng">Engelska</label>
         <input type="radio" name="lang" value="eng" checked>
 	<label for="swe">Svenska</label>
 	<input type="radio" name="lang" value="swe">
 <input type="text" size="30" onkeyup="showResult(this.value, this.lang)">-->
-<input type="text" size="30" onkeyup="showResult(this.value)">
-<div id="finds"></div>
+<input type="text" autocomplete="off" name="search" required="required" onkeyup="showResult(this.value)">
 
+<input type="reset" value=""/>
+<table>
+    <thead>
+        <th colspan="1">Engelska</th>
+        <th colspan="1">Svenska</th>
+    </thead>
+    
+    <tbody id="finds">
+</tbody>
+<tfoot>
+    
+</tfoot>
+</table>
 <div id="wiki"></div>
 </form>
     </section>
-        
+         </main>
     </body>
 </html>
 

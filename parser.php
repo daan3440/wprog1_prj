@@ -49,7 +49,7 @@ if ($result == null) {
         echo "<pre>";
         #make fancy output
         #skicka query till wiki?
-        echo $res['eng'] . "(eng)<br>";
+        echo $res['eng'] . "(eng) --> ";
 
         if ($res['swe'] == '#') {
             echo "Det saknas svensk översättning. <a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
@@ -60,16 +60,18 @@ if ($result == null) {
     }
     
 }else {
+    
     foreach ($result as $res) {
-        echo "<pre>";
-        echo $res['eng'] . "(eng)<br>";
+        echo "<tr><td>";
+        echo $res['eng'] . "(eng)</td><td>";
 
         if ($res['swe'] == '#') {
             echo "Det saknas svensk översättning. <a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
         } else {
             echo $res['swe'] . "(sve)";
         }
-        echo "</pre>";
+        echo "</td></tr>";
+        
     }
 }
 
