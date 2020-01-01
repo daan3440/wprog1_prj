@@ -1,0 +1,171 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html {
+	/*background-image: url("images/greystripe.png");*/
+	/*background-image: url("images/yx.png");*/
+	/*background-image: url("images/yx2.png");*/
+	/*background-image: url("images/jc.png");*/
+}
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #444;
+	margin: 12px;
+	padding: 2em;
+	background: rgba(242, 242, 242, 0.8);
+	border-radius: 12px;
+        
+}
+
+.search-form {
+    margin-bottom: 1.375rem;
+    height: 3.5rem
+}
+h1{
+    font-size: 3rem;
+}
+pre{
+    color: lightblue;
+}
+pre a:link {
+	color: #555555;
+}
+
+pre  a:visited {
+	color: #555555;
+}
+
+pre a:hover {
+	color: #555555;
+	text-decoration-line: underline;
+}
+
+pre a:active {
+	color: lightblue;
+	text-decoration-line: overline;
+	font-style: italic;
+}
+table {
+     border: 1px solid black;
+}
+th{
+    text-align: left;
+}
+td {
+    color: lightblue;
+}
+td a:link {
+	color: #555555;
+}
+
+td  a:visited {
+	color: #555555;
+}
+
+td a:hover {
+	color: #555555;
+	text-decoration-line: underline;
+}
+
+td a:active {
+	color: lightblue;
+	text-decoration-line: overline;
+	font-style: italic;
+}
+/*.search-form__input {
+   
+}
+.search-form__button {
+    right: .5rem;
+    top: .5rem
+}
+
+.search-form__button, .search-form__button-icon {
+    height: 40px;
+    height: calc(var(--search-form-button-size) * 1.25);
+    width: 40px;
+    width: calc(var(--search-form-button-size) * 1.25)
+}
+.search-form__button-icon {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+.search-form__button-icon svg {
+    width: 20px;
+    width: calc(var(--search-form-icon-size) * 1.25);
+    height: 20px;
+    height: calc(var(--search-form-icon-size) * 1.25)
+}
+
+.search-form__reset {
+    right: 48px;
+    right: calc(var(--search-form-button-size) * 1.5)
+}
+
+.search_button_reset {
+
+        height: 100px;
+        fill: black;
+}
+
+.search_button_reset:hover {
+        fill: #7851a9;
+}*/
+
+input[type="text"]
+{
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-left: var(--spacing-default);
+    padding-right: 5rem
+}
+
+input[type="text"]:invalid + input[type="reset"]{
+    display: none;
+} 
+
+input[type="reset"]
+{
+    background-color: lightblue;
+    -webkit-mask-image: url( ../images/reset.svg );
+    mask-image: url( ../images/reset.svg );
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none;
+    /*background-color: transparent;*/
+    cursor: pointer;
+    position: relative;
+    /*top: 0px;*/
+    left: -38px;
+
+}
+
+
+
+/*   
+.svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #4691f6;
+}
+
+.svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}*/
+
