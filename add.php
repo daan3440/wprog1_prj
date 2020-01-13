@@ -14,7 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //    echo print_r($req);
     $word = array($req);
     $con->addSuggestionByID($pdo, $word);
-    $id = $word[0]['id'];
+    
+    //Flytta ut rutin
+//    $id = $word[0]['id'];
     //add redirect ;message first; 
     $words = $con->getSuggestions($pdo);
     $result = array();
@@ -32,17 +34,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "sugg_date" => $sugg_date->item(0)->childNodes->item(0)->nodeValue);
             array_push($result, $tmp);
         }
-
+        ///Save this and putput to HTML file inspect.php/html
+        //Save this in a string
         foreach ($result as $res) {
             echo "<tr><td>";
             echo $res['eng'] . "</td><td>";
             echo $res['swe'] . "</td><td>";
             echo $res['sugg_date'] .
-            "<a href='add.php?confirm=yes&id=" . $res['id'] . "'>Godkänn</a>" .
-            "<a href='add.php?confirm=no&id=" . $res['id'] . "'>Neka</a>";
-
+            "<a href='confirm.php?confirm=yes&id=" . $res['id'] . "'>Godkänn</a>" .
+            "<a href='confirm.php?confirm=no&id=" . $res['id'] . "'>Neka</a>";
             echo "</td></tr>";
         }
+        
+        
+        
+        
     }
 
 //    echo "<pre>";
@@ -53,18 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //    $str = str_replace('---english---', $word[0]['eng'], $str);
 //    $html = str_replace('---id---', $word[0]['id'], $str);
 //    echo $html;
-} elseif(isset($_GET["confirm"])) {
-    $id = $_GET["id"];
-    $confirm = $_GET["confirm"];
-        if ($confirm == "yes") {
-            $word = $con->getByID($pdo, $id);
-            $con->updateByID($pdo, $word);
-        } else {
-//            echo "Inget ändrat.";
-            header("Location: http://localhost/wprog1_prj/search.php");
-            exit();
-        }
-    
 } else {
     $id = $_GET["id"];
     $word = $con->getByID($pdo, $id);

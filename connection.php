@@ -38,7 +38,14 @@ class Connection {
         $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
         $stmt->execute([$swe, date('Y-m-d H:i:s'), $id]);
     }
-      public function updateByID($pdo, $word){
+      public function rollBackByID($pdo, $word){
+        $id = $word[0]['id'];
+        $swe = '#';
+        $str = '0000000000';
+        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe, sugg_date=? WHERE id=?');
+        $stmt->execute([$swe, date('Y-m-d H:i:s', $str), $id]);
+    }
+    public function confirmByID($pdo, $word){
         $id = $word[0]['id'];
         $str = '0000000000';
         $stmt= $pdo->prepare('UPDATE eng_swe_final SET sugg_date=? WHERE id=?');

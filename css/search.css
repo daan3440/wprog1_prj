@@ -71,8 +71,12 @@ textarea{
     margin-bottom: 1.5em;
     margin-left: 1.5em;
 }
-h1{
+h1 a{
     font-size: 3rem;
+}
+h1 a{
+    color: inherit;
+    text-decoration: none;
 }
 table {
     width: 100%;
