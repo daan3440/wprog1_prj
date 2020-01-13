@@ -1,5 +1,11 @@
 <?php
 
+include 'functions.php';
+$ch = new Functions;
+//$ch->logger();
 
-$html = file_get_contents("search_def.html");
+$str = file_get_contents("search_def.html");
+$html = str_replace('--salkaslk1234lk3kioa--', $ch->countHit(), $str);
 echo $html;
+
+

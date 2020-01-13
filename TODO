@@ -1,3 +1,21 @@
 √ if swe == #
     alternativ för att föreslå översättning
 
+
+Reset doesnt reset Table
+
+Add use cases:
+    Addera land apå konfirmationssida.,
+    "Du lade till .... "
+        Tack.
+                Redirect tll Search.
+    Kolla uppdaterade - konfirmera ord.
+                        Neka ord.
+    
+
+SPLITTTa add.php
+         update
+         confirm
+
+
+Ta reda på hur redirects fungerar.

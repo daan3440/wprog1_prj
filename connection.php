@@ -9,7 +9,7 @@ class Connection {
         define('CHARSET', 'utf8');
         define('DB_USERNAME', 'root');
         define('DB_PASSWORD', '');
-//        $search = 'absolute';
+
         try {
             $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=' . CHARSET;
             $pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
@@ -27,21 +27,51 @@ class Connection {
         return $pdo;
     }
     public function getByID($pdo, $id){
-        $stmt = $pdo->prepare('select id, eng, swe from eng_swe_final where id =' . $id);
+        $stmt = $pdo->prepare('select id, eng, swe, sugg_date from eng_swe_final where id =' . $id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     
-    public function insertByID($pdo, $word){
+    public function addSuggestionByID($pdo, $word){
         $swe = $word[0]['swe'];
         $id = $word[0]['id'];
-//        $word[0]['id'], $word[0]['swe']
-//        echo print_r($word);
-        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=? WHERE id=?');
-        $stmt->execute([$swe, $id]);
-//        echo $word[0]['id']." ".$word[0]['swe'];
+        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
+        $stmt->execute([$swe, date('Y-m-d H:i:s'), $id]);
+    }
+      public function updateByID($pdo, $word){
+        $id = $word[0]['id'];
+        $str = '0000000000';
+        $stmt= $pdo->prepare('UPDATE eng_swe_final SET sugg_date=? WHERE id=?');
+        $stmt->execute([date('Y-m-d H:i:s', $str), $id]);
+    }
+    public function getSuggestions($pdo) {
+        $stmt = $pdo->prepare('SELECT * from eng_swe_final WHERE sugg_date != ("0000-00-00 00:00:00" || "1970-01-01 01:00:00")');
+        $stmt->execute();
+        $result = $stmt->fetchAll();
         
-            
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->formatOutput = true;
+        $root = $dom->createElement('root');
+        $root = $dom->appendChild($root);
+        foreach ($result as $word) {
+            $term = $dom->createElement('term');
+            $root->appendChild($term);
+
+            $id = $dom->createElement('id');
+            $id->appendChild($dom->createTextNode($word['id']));
+            $term->appendChild($id);
+            $eng = $dom->createElement('eng');
+            $eng->appendChild($dom->createTextNode($word['eng']));
+            $term->appendChild($eng);
+            $swe = $dom->createElement('swe');
+            $swe->appendChild($dom->createTextNode($word['swe']));
+            $term->appendChild($swe);
+            $sugg_date = $dom->createElement('sugg_date');
+            $sugg_date->appendChild($dom->createTextNode($word['sugg_date']));
+            $term->appendChild($sugg_date);
+        }
+
+        return $dom;
     }
     
     public function getDictionary($pdo) {
@@ -64,8 +94,6 @@ class Connection {
             $eng = $dom->createElement('eng');
             $eng->appendChild($dom->createTextNode($word['eng']));
             $term->appendChild($eng);
-//                $attr = $dom->createAttribute('eng');
-//                $attr = $dom->createAttribute('swe');
             $swe = $dom->createElement('swe');
             $swe->appendChild($dom->createTextNode($word['swe']));
             $term->appendChild($swe);

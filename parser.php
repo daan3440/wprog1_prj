@@ -16,14 +16,14 @@ $query = $_GET["q"];
 //lookup all links from the xml file if length of q>0
 $result = array();
 //  $hint= "";
-if (strlen($query) > 1) {
+if (strlen($query) > 2) {
         for ($i = 0; $i < ($x->length); $i++) { //all words
             $id = $x->item($i)->getElementsByTagName('id');
             $eng = $x->item($i)->getElementsByTagName('eng');
             $swe = $x->item($i)->getElementsByTagName('swe');
             if ($eng->item(0)->nodeType == 1) {
-                //find a link matching the search text
-                if (stristr($eng->item(0)->childNodes->item(0)->nodeValue, $query)) {
+                //find a post matching the search text
+                if (stristr($eng->item(0)->childNodes->item(0)->nodeValue, $query) || stristr($swe->item(0)->childNodes->item(0)->nodeValue, $query)) {
                     if ($result == null) {
                         $tmp = array("id" => $id->item(0)->childNodes->item(0)->nodeValue,
                             "eng" => $eng->item(0)->childNodes->item(0)->nodeValue,
@@ -42,41 +42,39 @@ if (strlen($query) > 1) {
 
 
 if ($result == null) {
-    echo "Inga träffar    ";
+    echo "Inga träffar";
 } elseif(sizeof($result) < 4) {
     #create search and return of values
     foreach ($result as $res) {
-        echo "<pre>";
-        #make fancy output
-        #skicka query till wiki?
-        echo $res['eng'] . "(eng) --> ";
+        #make fancy output?
+        #skicka query till wiki
+        echo "<tr><td>";
+        echo $res['eng'] . "</td><td>";
 
         if ($res['swe'] == '#') {
-            echo "Det saknas svensk översättning. <a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
+            echo "<a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
         } else {
-            echo $res['swe'] . "(sve)";
+            echo $res['swe'];
         }
-        echo "</pre>";
+        echo "</td></tr>";
     }
     
 }else {
     
     foreach ($result as $res) {
         echo "<tr><td>";
-        echo $res['eng'] . "(eng)</td><td>";
+        echo $res['eng'] . "</td><td>";
 
         if ($res['swe'] == '#') {
-            echo "Det saknas svensk översättning. <a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
+            echo "<a href='add.php?id=".$res['id']."'>Föreslå översättning?</a>";
         } else {
-            echo $res['swe'] . "(sve)";
+            echo $res['swe'];
         }
         echo "</td></tr>";
         
     }
 }
 
-
-// Skicka skiten nånstans}
 //echo print_r($result);
 
 
