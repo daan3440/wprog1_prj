@@ -1,6 +1,63 @@
 <?php
 
 class Functions {
+    public function noSuggestions() {
+         $str = file_get_contents("inspect.html");
+            //Table header
+             $headstr = "<th colspan=\"1\">Inga föreslagna översättningar.</th>";
+            $buildstr = "";
+            $tmpstr = str_replace('---19872789483619826197359175667sdfgheaderheheheghf---', $headstr, $str);
+            //Table data
+            $html = str_replace('---19872789483619826197359175667sdfgfdfgfhghf---', $buildstr, $tmpstr);
+
+            echo $html;
+    }
+    public function listSuggestions($words) {
+        $result = array();
+        if ($x = $words->getElementsByTagName('term')) {
+//    echo $words->saveXML();
+            for ($i = 0; $i < ($x->length); $i++) { //all words
+                $id = $x->item($i)->getElementsByTagName('id');
+                $eng = $x->item($i)->getElementsByTagName('eng');
+                $swe = $x->item($i)->getElementsByTagName('swe');
+                $sugg_date = $x->item($i)->getElementsByTagName('sugg_date');
+
+                $tmp = array("id" => $id->item(0)->childNodes->item(0)->nodeValue,
+                    "eng" => $eng->item(0)->childNodes->item(0)->nodeValue,
+                    "swe" => $swe->item(0)->childNodes->item(0)->nodeValue,
+                    "sugg_date" => $sugg_date->item(0)->childNodes->item(0)->nodeValue);
+                array_push($result, $tmp);
+            }
+
+            ///Save this and putput to HTML file inspect.php/html
+            //Save this in a string
+            $headstr = "<th colspan=\"1\">Engelska</th><th colspan=\"1\">Svenska</th>"
+                    . "<th colspan=\"1\">Datum</th>"
+                    . "<th colspan=\"1\">Godkänn</th>"
+                    . "<th colspan=\"1\">Avslå</th>";
+            $buildstr = "";
+            foreach ($result as $res) {
+                $buildstr .= "<tr><td>";
+                $buildstr .= $res['eng'] . "</td><td>";
+                $buildstr .= $res['swe'] . "</td><td>";
+                $buildstr .= $res['sugg_date'] .
+                        "</td><td><a href='confirm.php?confirm=yes&id=" . $res['id'] . "'>Godkänn</a></td>" .
+                        "<td><a href='confirm.php?confirm=no&id=" . $res['id'] . "'>Avslå</a>";
+                $buildstr .= "</td></tr>";
+            }
+//        echo " HEADSTRING" . $headstr . "\n";
+//        echo $buildstr . " BUILDSTRING\n";
+
+
+            $str = file_get_contents("inspect.html");
+            //Table header
+            $tmpstr = str_replace('---19872789483619826197359175667sdfgheaderheheheghf---', $headstr, $str);
+            //Table data
+            $html = str_replace('---19872789483619826197359175667sdfgfdfgfhghf---', $buildstr, $tmpstr);
+
+            echo $html;
+        }
+    }
 
 //    public function getLog($html_piece) {
 //        $handle = fopen("log.log", "r");
@@ -76,5 +133,4 @@ class Functions {
 //    function generateFooter() {
 //        return ("Copyright 2019 Monster Inc.");
 //    }
-
 }

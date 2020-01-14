@@ -42,7 +42,7 @@ class Connection {
         $id = $word[0]['id'];
         $swe = '#';
         $str = '0000000000';
-        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe, sugg_date=? WHERE id=?');
+        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
         $stmt->execute([$swe, date('Y-m-d H:i:s', $str), $id]);
     }
     public function confirmByID($pdo, $word){
@@ -52,7 +52,7 @@ class Connection {
         $stmt->execute([date('Y-m-d H:i:s', $str), $id]);
     }
     public function getSuggestions($pdo) {
-        $stmt = $pdo->prepare('SELECT * from eng_swe_final WHERE sugg_date != ("0000-00-00 00:00:00" || "1970-01-01 01:00:00")');
+        $stmt = $pdo->prepare('SELECT * from eng_swe_final WHERE sugg_date != "0000-00-00 00:00:00" AND sugg_date != "1970-01-01 01:00:00"');
         $stmt->execute();
         $result = $stmt->fetchAll();
         

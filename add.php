@@ -3,7 +3,9 @@
 //header('Content-type: text/plain');
 
 include 'connection.php';
+include 'functions.php';
 $con = new Connection();
+$fun = new Functions();
 //$stmt = initConnection();
 $pdo = $con->initConnection();
 
@@ -19,37 +21,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //    $id = $word[0]['id'];
     //add redirect ;message first; 
     $words = $con->getSuggestions($pdo);
-    $result = array();
-    if ($x = $words->getElementsByTagName('term')) {
-//    echo $words->saveXML();
-        for ($i = 0; $i < ($x->length); $i++) { //all words
-            $id = $x->item($i)->getElementsByTagName('id');
-            $eng = $x->item($i)->getElementsByTagName('eng');
-            $swe = $x->item($i)->getElementsByTagName('swe');
-            $sugg_date = $x->item($i)->getElementsByTagName('sugg_date');
-
-            $tmp = array("id" => $id->item(0)->childNodes->item(0)->nodeValue,
-                "eng" => $eng->item(0)->childNodes->item(0)->nodeValue,
-                "swe" => $swe->item(0)->childNodes->item(0)->nodeValue,
-                "sugg_date" => $sugg_date->item(0)->childNodes->item(0)->nodeValue);
-            array_push($result, $tmp);
-        }
-        ///Save this and putput to HTML file inspect.php/html
-        //Save this in a string
-        foreach ($result as $res) {
-            echo "<tr><td>";
-            echo $res['eng'] . "</td><td>";
-            echo $res['swe'] . "</td><td>";
-            echo $res['sugg_date'] .
-            "<a href='confirm.php?confirm=yes&id=" . $res['id'] . "'>Godkänn</a>" .
-            "<a href='confirm.php?confirm=no&id=" . $res['id'] . "'>Neka</a>";
-            echo "</td></tr>";
-        }
-        
-        
-        
-        
-    }
+    $fun->listSuggestions($words);
+//    $result = array();
+//    if ($x = $words->getElementsByTagName('term')) {
+////    echo $words->saveXML();
+//        for ($i = 0; $i < ($x->length); $i++) { //all words
+//            $id = $x->item($i)->getElementsByTagName('id');
+//            $eng = $x->item($i)->getElementsByTagName('eng');
+//            $swe = $x->item($i)->getElementsByTagName('swe');
+//            $sugg_date = $x->item($i)->getElementsByTagName('sugg_date');
+//
+//            $tmp = array("id" => $id->item(0)->childNodes->item(0)->nodeValue,
+//                "eng" => $eng->item(0)->childNodes->item(0)->nodeValue,
+//                "swe" => $swe->item(0)->childNodes->item(0)->nodeValue,
+//                "sugg_date" => $sugg_date->item(0)->childNodes->item(0)->nodeValue);
+//            array_push($result, $tmp);
+//        }
+//
+//        ///Save this and putput to HTML file inspect.php/html
+//        //Save this in a string
+//        $headstr = "<th colspan=\"1\">Engelska</th><th colspan=\"1\">Svenska</th>"
+//                . "<th colspan=\"1\">Datum</th>"
+//                . "<th colspan=\"1\">Godkänn</th>"
+//                . "<th colspan=\"1\">Avslå</th>";
+//        $buildstr = "";
+//        foreach ($result as $res) {
+//            $buildstr .= "<tr><td>";
+//            $buildstr .= $res['eng'] . "</td><td>";
+//            $buildstr .= $res['swe'] . "</td><td>";
+//            $buildstr .= $res['sugg_date'] .
+//            "</td><td><a href='confirm.php?confirm=yes&id=" . $res['id'] . "'>Godkänn</a></td>" .
+//            "<td><a href='confirm.php?confirm=no&id=" . $res['id'] . "'>Neka</a>";
+//            $buildstr .= "</td></tr>";
+//        }
+////        echo " HEADSTRING" . $headstr . "\n";
+////        echo $buildstr . " BUILDSTRING\n";
+//        
+//            
+//    $str = file_get_contents("inspect.html");
+//    //Table header
+//    $tmpstr = str_replace('---19872789483619826197359175667sdfgheaderheheheghf---', $buildstr, $str);
+//    //Table data
+//    $html = str_replace('---19872789483619826197359175667sdfgfdfgfhghf---', $headstr, $tmpstr);
+//    
+//    echo $html;
+//        
+//        
+//        
+//        
+//    }
 
 //    echo "<pre>";
 //    echo print_r($con->getByID($pdo, $id));

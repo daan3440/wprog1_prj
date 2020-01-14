@@ -19,8 +19,23 @@
     <body>
         <header class="phead">
             <section>
-                <h1><a href="index.php">Engelsk-Svensk statistisk ordbok </a></h1>
+                <section>
+            <!-- Top Navigation Menu -->
+   <input type="checkbox" id="menu-toggle"/>
+  <label id="trigger" for="menu-toggle"></label>
+  <label id="burger" for="menu-toggle"></label>
+  <ul id="menu">
+    <li><a href="index.php">Hem</a></li>
+    <li><a href="about.php">Om</a></li>
+    <li><a href="inspect.php">Redigera</a></li>
+
+  </ul>
+  </section>
+
+            <section>
+                <h1><a>Engelsk-Svensk statistisk ordbok</a></h1>
             </section>
+</section>
         </header>
         <main class="main">
             <section class="content">
@@ -32,25 +47,22 @@
                         <label for="swedish">---english--- </label><br>
                         <textarea name="swe" placeholder="Skriv din översättning här!" title="Översättning"></textarea>
                     </fieldset>
-                    <input type="submit" name="submit" value="Skicka">
+                    <button class="submitter btn" type="submit" name="submit" value="Skicka">Skicka</button>
+                  
 
                     <div id="finds"></div>
 
                 </form>
             </section>
         </main>
- <footer class="pfoot">
+<footer class="pfoot">
             <section  class="footercontent">
-
-             
                 <p>
-                    <a href="mailto:daan3440@student.su.se">Kontakta mig!</a>
+                    <a href="mailto:daan3440@student.su.se">Kontakt © 2019</a>
                 </p>
-                   <p>Antal besökare --salkaslk1234lk3kioa--.
+                <p>
+                    Svensk översättning för ISI Multilingual Glossary of Statistical Terms. Upphovsmän är Jan Enger, Bernhard Huitfeldt, Ulf Jorner och Jan Wretman.
                 </p>
-                <p>Lägg in coyritgh och info om upphovsmän</p>
-
-                <!--<p>Länk till <a href="log.php">log.</a></p>-->
             </section>
         </footer>
     </body>
