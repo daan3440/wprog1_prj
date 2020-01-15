@@ -5,21 +5,22 @@
         <meta name="author" content="Daniel Andersson">
         <meta name="description" content="Hemsida för kursen Webbutv. 1">
         <meta name="generator" content="Sublime">
-        <meta name="keywords" content="HTML,CSS,XML,JavaScript skriven för kursenWPROG1 av Daniel Andersson">
+        <meta name="keywords" content="WPROG1_PRJ">
         <meta name="robots" content="noindex" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Statistisk begreppsöversättare</title>
+        <title>Statistiskordlista Engelska - Svenska</title>
         <link rel="stylesheet" href="css/search.css">
-        <!--<link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet">-->
+        <link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet">
         <link rel="alternate" type="application/rss+xml" title="RSS Feed - Daniel Andersson" href="/rss/rss.xml" />  
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="js/script.js"></script>
     </head>
     <body>
-        <header class="phead">
-            <section>
-                <section>
+               <header class="phead">
+            
+            
+                <section class="navigation-links">
             <!-- Top Navigation Menu -->
    <input type="checkbox" id="menu-toggle"/>
   <label id="trigger" for="menu-toggle"></label>
@@ -31,50 +32,35 @@
 
   </ul>
   </section>
-
             <section>
                 <h1><a href="search.php">Engelsk-Svensk statistisk ordbok</a></h1>
             </section>
-</section>
         </header>
         <main class="main">
             <section class="content">
-                <form class="search-form" enctype="multipart/form-data" action="add.php" method="post" accept-charset="utf-8">
-                    <fieldset>
-                        <legend>Föreslå översättning</legend>
-                        <!-- FIXA BORt CSS -->
-                        <input type="text" name="id" style="visibility:hidden" value="---id---"><br>
-                        <label for="swedish">---english--- </label><br>
-                        <textarea name="swe" placeholder="Skriv din översättning här!" title="Översättning"></textarea>
-                    </fieldset>
-                    <button class="submitter btn" type="submit" name="submit" value="Skicka">Skicka</button>
-                  
-
-                    <div id="finds"></div>
-
-                </form>
+                <section class="about">
+                <header> Om ordlistan</header>
+                <p>Denna ordlista visar översättningar av statistiska termer från Engelska till Svenska.
+                </p>
+                <p>Hemsidan är byggd av Daniel Andersson och använder sig av en ordlista sammanställd av  Jan Enger, Bernhard Huitfeldt, Ulf Jorner och Jan Wretman.
+                </p>
+                <p>Du söker genom att skriva in minst 3 tecken i sökfältet. Om din sökning får några träffar så kommer de att listas under sökfältet.
+                </p>
+                <p> Om en engelsk term som saknar svensk översättning så kan man föreslå en översättning genom att klicka på länken bredvid ordet i fråga.</p>
+                <p> Sidan är responsiv och kan med fördel användas på olika sorters enheter.</p>
+                </section>
             </section>
         </main>
-<footer class="pfoot">
+        <footer class="pfoot">
             <section  class="footercontent">
                 <p>
                     <a href="mailto:daan3440@student.su.se">Kontakt © 2019</a>
                 </p>
                 <p>
-                    Svensk översättning för ISI Multilingual Glossary of Statistical Terms av Jan Enger, Bernhard Huitfeldt, Ulf Jorner och Jan Wretman.
+                    Svensk översättning för ISI Multilingual Glossary of Statistical Terms. Upphovsmän är Jan Enger, Bernhard Huitfeldt, Ulf Jorner och Jan Wretman.
                 </p>
+          
             </section>
         </footer>
-    </body>
-</html>
-
-
-<html>
-    <head>
-
-    </head>
-    <body>
-
-
     </body>
 </html>

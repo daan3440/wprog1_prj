@@ -42,7 +42,7 @@ if (strlen($query) > 2) {
 
 
 if ($result == null) {
-    echo "Inga träffar";
+    echo "<tr><td colspan=\"2\">Inga träffar</td></tr>";
 } elseif(sizeof($result) < 4) {
     #create search and return of values
     foreach ($result as $res) {
