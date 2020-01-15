@@ -2,19 +2,20 @@
     alternativ för att föreslå översättning
 
 
-Reset doesnt reset Table
+Reset doesnt reset Table 
 
 Add use cases:
-    Addera land apå konfirmationssida.,
+    Addera landa på konfirmationssida.,
     "Du lade till .... "
         Tack.
                 Redirect tll Search.
     Kolla uppdaterade - konfirmera ord.
                         Neka ord. <- fungerar inte
     
+redriect från listan till search lr listan
 
-SPLITTTa add.php
-         update
+SPLITTTa add.php √
+         update √
          confirm
 
 

@@ -58,14 +58,22 @@ main {
 }
 .searchsec{
     margin-left: 6%;
+    
 }
-.about header{
+header{
     font-weight: 200;
     font-size: 2rem;
     color: #888;
     margin-bottom: 1rem;
 
 }
+/*.about header{
+    font-weight: 200;
+    font-size: 2rem;
+    color: #888;
+    margin-bottom: 1rem;
+
+}*/
 .about p{
     border-radius: 8px;
     border: 1px solid #9999ff;  
@@ -110,7 +118,7 @@ h1 a{
     
 }
 table {
-    width: 100%;
+    width: 70%;
     
     /*border: 1px solid black;*/
     /*margin-bottom: 1rem;*/
@@ -275,12 +283,12 @@ footer {
 
 @keyframes checked-anim {
     50% {
-        width: 120px;
-        height: 120px;
+        width: 210px;
+        height: 240px;
     }
     100% {
-        width: 130px;
-        height: 120px;
+        width: 220px;
+        height: 260px;
         /*border-radius-right: 100%;*/
     }
 }
@@ -309,7 +317,7 @@ li {
 
 a:focus {
     display: block;
-    transition: all .5s;
+    transition: all .3s;
 }
 
 
@@ -377,7 +385,7 @@ a:focus {
 /*    width: 10px;
     height: 10px;*/
     background-color: rgba(255,255,255, 0.94);
-    border-bottom-right-radius: 50%;
+    border-bottom-right-radius: 30%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.26);
     animation: checked-anim 1s ease both;
 }

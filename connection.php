@@ -18,9 +18,6 @@ class Connection {
             $pdo->exec('set session sql_mode = traditional');
             $pdo->exec('set session innodb_strict_mode = on');
             
-
-//    $words = $dom->saveXML(); // put string in test1
-//    $dom->save('xml/words.xml'); // save as file
         } catch (PDOException $e) {
             die(htmlspecialchars($e->getMessage()));
         }
@@ -77,7 +74,7 @@ class Connection {
             $sugg_date->appendChild($dom->createTextNode($word['sugg_date']));
             $term->appendChild($sugg_date);
         }
-
+        
         return $dom;
     }
     
@@ -104,6 +101,9 @@ class Connection {
             $swe = $dom->createElement('swe');
             $swe->appendChild($dom->createTextNode($word['swe']));
             $term->appendChild($swe);
+            $sugg_date = $dom->createElement('sugg_date');
+            $sugg_date->appendChild($dom->createTextNode($word['sugg_date']));
+            $term->appendChild($sugg_date);
         }
 
         return $dom;
