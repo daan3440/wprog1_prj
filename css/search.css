@@ -63,14 +63,16 @@ main {
     font-weight: 200;
     font-size: 2rem;
     color: #888;
+    margin-bottom: 1rem;
 
 }
 .about p{
-    border-radius: 14px;
+    border-radius: 8px;
     border: 1px solid #9999ff;  
     background-color: #eee;  
     width: 80%;
-    margin: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
     padding: 12px;
 }
 .search-form {
@@ -95,8 +97,6 @@ fieldset label{
 }
 
 textarea{
-    border-radius: 12px;
-    padding: 1rem;
     width: 40%;
     margin: 1em;
     margin-bottom: 1.5em;
