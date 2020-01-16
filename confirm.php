@@ -2,7 +2,6 @@
 
 include 'connection.php';
 $con = new Connection();
-//$stmt = initConnection();
 $pdo = $con->initConnection();
 
 $confirm = $_GET["confirm"];

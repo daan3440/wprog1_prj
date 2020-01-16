@@ -2,8 +2,8 @@
 
 include 'connection.php';
 $con = new Connection();
-//$stmt = initConnection();
 $pdo = $con->initConnection();
+
 $words = $con->getDictionary($pdo);
 
 if ($x = $words->getElementsByTagName('term')) {
@@ -12,12 +12,9 @@ if ($x = $words->getElementsByTagName('term')) {
 //get the q parameter from URL
 $query = $_GET["q"];
 //   echo $lang;
-//$query = 'abn';
-//lookup all links from the xml file if length of q>0
 $result = array();
-//  $hint= "";
 if (strlen($query) > 2) {
-        for ($i = 0; $i < ($x->length); $i++) { //all words
+        for ($i = 0; $i < ($x->length); $i++) {
             $id = $x->item($i)->getElementsByTagName('id');
             $eng = $x->item($i)->getElementsByTagName('eng');
             $swe = $x->item($i)->getElementsByTagName('swe');
@@ -43,11 +40,10 @@ if (strlen($query) > 2) {
 
 if ($result == null) {
     echo "<tr><td colspan=\"2\">Inga träffar</td></tr>";
+    //Preapring for dictionary function.
 } elseif(sizeof($result) < 4) {
-    #create search and return of values
     foreach ($result as $res) {
-        #make fancy output?
-        #skicka query till wiki
+        #send query till wiki?
         echo "<tr><td>";
         echo $res['eng'] . "</td><td>";
 
@@ -74,7 +70,6 @@ if ($result == null) {
         
     }
 }
-
 //echo print_r($result);
 
 

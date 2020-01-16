@@ -23,90 +23,102 @@ class Connection {
         }
         return $pdo;
     }
-    public function getByID($pdo, $id){
+
+    function consoleLog($output, $with_script_tags = true) {
+        $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . ');';
+        if ($with_script_tags) {
+            $js_code = '<script>' . $js_code . '</script>';
+        }
+        echo $js_code;
+    }
+
+    public function getByID($pdo, $id) {
         $stmt = $pdo->prepare('select id, eng, swe, sugg_date from eng_swe_final where id =' . $id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
-    public function addSuggestionByID($pdo, $word){
+
+    public function addSuggestionByID($pdo, $word) {
         $swe = $word[0]['swe'];
         $id = $word[0]['id'];
-        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
+        $stmt = $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
         $stmt->execute([$swe, date('Y-m-d H:i:s'), $id]);
     }
-      public function rollBackByID($pdo, $word){
+
+    public function rollBackByID($pdo, $word) {
         $id = $word[0]['id'];
         $swe = '#';
         $str = '0000000000';
-        $stmt= $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
+        $stmt = $pdo->prepare('UPDATE eng_swe_final SET swe=?, sugg_date=? WHERE id=?');
         $stmt->execute([$swe, date('Y-m-d H:i:s', $str), $id]);
     }
-    public function confirmByID($pdo, $word){
+
+    public function confirmByID($pdo, $word) {
         $id = $word[0]['id'];
         $str = '0000000000';
-        $stmt= $pdo->prepare('UPDATE eng_swe_final SET sugg_date=? WHERE id=?');
+        $stmt = $pdo->prepare('UPDATE eng_swe_final SET sugg_date=? WHERE id=?');
         $stmt->execute([date('Y-m-d H:i:s', $str), $id]);
     }
+
     public function getSuggestions($pdo) {
         $stmt = $pdo->prepare('SELECT * from eng_swe_final WHERE sugg_date != "0000-00-00 00:00:00" AND sugg_date != "1970-01-01 01:00:00"');
         $stmt->execute();
         $result = $stmt->fetchAll();
-        
-        $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->formatOutput = true;
-        $root = $dom->createElement('root');
-        $root = $dom->appendChild($root);
+
+        $suggword = new DOMDocument('1.0', 'UTF-8');
+        $suggword->formatOutput = true;
+        $root = $suggword->createElement('root');
+        $root = $suggword->appendChild($root);
         foreach ($result as $word) {
-            $term = $dom->createElement('term');
+            $term = $suggword->createElement('term');
             $root->appendChild($term);
 
-            $id = $dom->createElement('id');
-            $id->appendChild($dom->createTextNode($word['id']));
+            $id = $suggword->createElement('id');
+            $id->appendChild($suggword->createTextNode($word['id']));
             $term->appendChild($id);
-            $eng = $dom->createElement('eng');
-            $eng->appendChild($dom->createTextNode($word['eng']));
+            $eng = $suggword->createElement('eng');
+            $eng->appendChild($suggword->createTextNode($word['eng']));
             $term->appendChild($eng);
-            $swe = $dom->createElement('swe');
-            $swe->appendChild($dom->createTextNode($word['swe']));
+            $swe = $suggword->createElement('swe');
+            $swe->appendChild($suggword->createTextNode($word['swe']));
             $term->appendChild($swe);
-            $sugg_date = $dom->createElement('sugg_date');
-            $sugg_date->appendChild($dom->createTextNode($word['sugg_date']));
+            $sugg_date = $suggword->createElement('sugg_date');
+            $sugg_date->appendChild($suggword->createTextNode($word['sugg_date']));
             $term->appendChild($sugg_date);
         }
-        
-        return $dom;
+
+        return $suggword;
     }
-    
+
     public function getDictionary($pdo) {
         $stmt = $pdo->prepare('select * from eng_swe_final');
         $stmt->execute();
         $result = $stmt->fetchAll();
-        
-        $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->formatOutput = true;
-        $root = $dom->createElement('root');
-        $root = $dom->appendChild($root);
+
+        $words = new DOMDocument('1.0', 'UTF-8');
+        $words->formatOutput = true;
+        $root = $words->createElement('root');
+        $root = $words->appendChild($root);
         foreach ($result as $word) {
-            $term = $dom->createElement('term');
+            $term = $words->createElement('term');
             $root->appendChild($term);
 
-            $id = $dom->createElement('id');
-            $id->appendChild($dom->createTextNode($word['id']));
+            $id = $words->createElement('id');
+            $id->appendChild($words->createTextNode($word['id']));
             $term->appendChild($id);
 
-            $eng = $dom->createElement('eng');
-            $eng->appendChild($dom->createTextNode($word['eng']));
+            $eng = $words->createElement('eng');
+            $eng->appendChild($words->createTextNode($word['eng']));
             $term->appendChild($eng);
-            $swe = $dom->createElement('swe');
-            $swe->appendChild($dom->createTextNode($word['swe']));
+            $swe = $words->createElement('swe');
+            $swe->appendChild($words->createTextNode($word['swe']));
             $term->appendChild($swe);
-            $sugg_date = $dom->createElement('sugg_date');
-            $sugg_date->appendChild($dom->createTextNode($word['sugg_date']));
+            $sugg_date = $words->createElement('sugg_date');
+            $sugg_date->appendChild($words->createTextNode($word['sugg_date']));
             $term->appendChild($sugg_date);
         }
 
-        return $dom;
+        return $words;
     }
 
 }

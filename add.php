@@ -1,5 +1,4 @@
 <?php
-//header('Content-type: text/plain');
 include 'connection.php';
 include 'functions.php';
 $con = new Connection();

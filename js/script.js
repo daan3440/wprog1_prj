@@ -5,7 +5,6 @@ function showResult(str) {
   if (str.length<=2) { 
     document.getElementById("thead").innerHTML="";
     document.getElementById("finds").innerHTML="";
-    document.getElementById("finds").style.border="0px";
     return;
   }
   if (window.XMLHttpRequest) {
@@ -20,11 +19,9 @@ function showResult(str) {
         var rx = new RegExp(str, "g");
         var res = this.responseText.replace(rx,"<mark>" + str + "</mark>");
         document.getElementById("thead").innerHTML="<th colspan=\"1\">Engelska</th><th colspan=\"1\">Svenska</th>";
-
         document.getElementById("finds").innerHTML=res;
         document.getElementById("wiki").innerHTML="&nbsp;";
-//      document.getElementById("finds").innerHTML=this.responseText;
-//        document.getElementById("finds").style.border="1px solid #A5ACA5";
+
     }
   }
 // language sorting
